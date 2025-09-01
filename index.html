@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body data-theme="dark">
+    <div class="container">
+        <div class="theme-toggle">
+            <button onclick="toggleTheme()">🌓</button>
+        </div>
+        <h1>📝 Task Manager</h1>
+        <div class="input-group">
+            <input id="taskTitle" type="text" placeholder="Add a Task" />
+            <input id="taskDueDate" type="date" />
+            <button onclick="addTask()">+</button>
+        </div>
+        <textarea id="task-description" placeholder="Task Description"></textarea>
+        <div class="actions">
+            <select id="filterSelect" onchange="filterTasks(this.value)" >
+                <option value="all">All</option>
+                <option value="completed">Completed</option>
+                <option value="pending">Pending</option>
+            </select>
+            <button onclick="deleteAllTasks()">Delete All</button>    
+        </div>
+        <div class="board">
+            <div class="column">
+                <h3>Incomplete</h3>
+                <div id="incompleteTasks" class="task-list" ondragover="allowDrop(event)" ondrop="handleDrop(event, false)"></div>
+            </div>
+            <div class="column">
+                <h3>Completed</h3>
+                <div id="completedTasks" class="task-list" ondragover="allowDrop(event)" ondrop="handleDrop(event, true)"></div>
+            </div>
+        </div>
+    </div>
+    <div id="subtaskModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2 id="modalTaskTitle"></h2>
+            <p id="modalTaskDescription"></p>
+            <p id="modalDueDate"></p>
+            <div class="subtask-input">
+                <input id="subtaskTitleInput" type="text" placeholder="Add a Subtask" />
+                <input id="subtaskDueDate" type="date" />
+                <button onclick="addSubtask()">Add</button>
+            </div>
+            <ul id="subtaskList"></ul>
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </div>
+    <div id="toast-container"></div>
+    <footer>Made by Shraddha Thorat</footer>
+    <script src="main.js"></script>
+</body>
+</html>
